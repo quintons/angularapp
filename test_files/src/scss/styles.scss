@@ -1,0 +1,41 @@
+$font-stack: verdana, helvetica;
+$primary-color: #333;
+
+body {
+    font: 100% $font-stack;
+    color: $primary-color;
+}
+
+div .checkbox input {
+    width: 20px !important;
+    height: 20px !important;
+    margin-top: 0px;
+}
+
+.validation-error {
+    color: red;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.control-label {
+    font-size: 12px;
+    margin-right: 0px;
+}
+
+.card { width: 300px; border: 1px solid #333333; margin-top: 25px; }
+.card h5 {
+    background-color: #337ab7;
+    color: #fff;
+    margin-top: 0px;
+    padding: 5px;
+}
+.card div.description, .card div.detail {
+    padding: 5px;
+}
+
+@media (min-width: 768px) {
+    .form-group .col-sm-3 {
+        width: 75%;
+    }
+}

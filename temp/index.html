@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>index</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+
+    <link rel="stylesheet" href="../src/scss/styles.css">
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/src/js/scriptstest.js"></script>
+
+</head>
+<body>
+
+<style type="text/css">
+
+    #box {
+        background-color: white;
+        width: auto;
+        height: 30px;
+        position: absolute;
+        top: 45%;
+        left: 45%;
+        transition: all 2s ease-in-out;
+    }
+
+    #box:hover {
+        background-color: red;
+        transform: scale(1.5) rotate(360deg) translate(0, 100px);
+    }
+
+</style>
+
+<div id="box">
+    <p>
+        some text to transform or not
+    </p>
+</div>
+
+<script>
+
+    /*var ready, $ = function(handler){
+        if(window.addEventListener){
+            window.addEventListener('DOMContentLoaded', handler, false)
+        }
+    };*/
+
+    $(function(){
+
+        // mutation observer
+        /*var target = document.querySelector('#test');
+
+        var observer = new MutationObserver(function(mutations){
+            console.log(mutations)
+            mutations.forEach(function(mutation){
+                console.log(mutation.type);
+            });
+        });
+
+        var config = {attributes: true, childList: true, characterData: true };
+        observer.observe(target, config);
+
+
+        $('button').bind('click', function(){
+
+            if(target.hasChildNodes()){
+                setInterval(function(){
+                    var cl = target.style.left;
+                    //console.log(cl - 20)
+                    target.style.left = (parseInt(cl) - 20) + 'px';
+                }, 10)
+            }
+
+        })*/
+
+
+        var A = {
+            myMethod: function(){
+                console.log('a.myMethod');
+            },
+            anotherMethod: function(){
+                console.log('anotherMethod');
+            }
+        }
+
+        var B = {
+            myMethod: function(){
+                console.log('b.myMethod')
+            }
+        }
+
+        var C = function() {
+            this.myMethod = function () {
+            }
+            this.foo = function () {
+            }
+        }
+
+        /*function A(a){
+            this.varA = a;
+        }
+
+        A.prototype = {
+            constructor: A,
+            varA: null,
+            doSomthing: function(){}
+        }
+
+        function B(a, b){
+            A.call(this, a);
+            this.varB = b;
+        }
+        B.prototype = Object.create(A.prototype, {
+            constructor: B,
+            varB: {
+                value: null,
+                enumerable: true,
+                configurable: true,
+                writable: true
+            },
+            doSomething: {
+                value: function(){
+                    A.prototype.doSomthing.apply(this, arguments);
+                },
+                enumerable: true,
+                configurable: true,
+                writable: true
+            }
+        });
+
+        var b = new B();
+        b.doSomething();*/
+
+        // indexdb
+
+
+        // opening the DB
+        var runDB = function(){
+            var db;
+            const CUSTOMER_DATA = [
+                { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
+                { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" }
+            ]
+
+            var request = window.indexedDB.open('MyTestDB', 1);
+            request.onerror = function(event){
+                console.log(event.target.errorCode)
+            }
+            request.onsuccess = function(event){
+                db = event.target.result;
+            }
+
+            request.onupgradeneeded = function(event){
+                var db = event.target.result;
+                var objectStore = db.createObjectStore('customers', {keyPath: 'ssn'});
+                objectStore.createIndex('name', 'name', {unique: false});
+                objectStore.createIndex('email', 'email', {unique: true});
+                objectStore.transaction.oncomplete = function(event) {
+                    // Store values in the newly created objectStore.
+                    var customerObjectStore = db.transaction("customers", "readwrite").objectStore("customers");
+                    console.log(CUSTOMER_DATA)
+                    for (var i in CUSTOMER_DATA) {
+                        customerObjectStore.add(CUSTOMER_DATA[i]);
+                    }
+                }
+            }
+
+        }
+
+        if(!window.indexedDB){
+            // ow dear
+        }else{
+            runDB();
+        }
+
+
+        /*
+        * array methods
+        * shift/unshift
+        * */
+
+        var doc = document.body;
+
+        var heading = document.createElement('h1');
+        var heading_text = document.createTextNode('Some heading');
+        heading.appendChild(heading_text);
+        doc.appendChild(heading);
+
+        document.getElementById('button').addEventListener('click', function(){
+            var container = document.getElementById('myId');
+            console.log(container.childNodes[1].setAttribute('myattrib', 'another value'));
+
+            for(var i = 0; i < container.childNodes.length; i++){
+                var c = container.childNodes[i];
+                if(c.nodeType == 1){
+                    if(c.nodeName === 'SPAN'){
+                        // found span
+                        console.log(c.innerHTML);
+                    }
+                }
+            }
+        }, false);
+
+        var something = function(element){
+            handleEvent = function(event){
+                switch(event.type){
+                    case 'click':
+                        break;
+                    case 'dblclick':
+                        break;
+                }
+            }
+            element.addEventListener('click', this, false);
+        }
+
+        var arr = ['hello', 'my', 'name', 'is', 'quinton'];
+
+        var newArr = arr.splice(1, 1);
+
+
+    })
+</script>
+
+<div id="myId">
+    <span myattrib="hello">some text</span>
+    <ul>
+        <li><a href="mylinka.html">text a</a></li>
+        <li><a href="mylinkb.html">text b</a></li>
+    </ul>
+</div>
+
+<button id="button">my button</button>
+
+</body>
+</html>

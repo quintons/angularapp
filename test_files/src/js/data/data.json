@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "name": "Apples",
+      "description": "Green apples - granny smiths",
+      "quantity": 40,
+      "isDone": false
+    },
+    {
+      "name": "Soya milk",
+      "description": "Tescos soya milk cheaper version, blue in color.",
+      "quantity": 1,
+      "isDone": false
+    }
+  ]
+}

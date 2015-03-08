@@ -1,0 +1,27 @@
+
+<form name="itemForm">
+    <div class="modal-header">
+        <h3 class="modal-title">Enter the shopping list detail below</h3>
+    </div>
+    <div ng-form="listForm" class="form-horizontal modal-body">
+
+        <input type="text" aa-field-group="item.name" ng-model="item.name" min="10" max="100" required aa-field="">
+        <textarea type="text" aa-field-group="item.description" ng-model="item.description" min="10" max="300" required></textarea>
+        <input type="number" aa-field-group="item.quantity" ng-model="item.quantity" required>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Done?</label>
+            <div class="col-sm-1 checkbox">
+                <label>
+                    <input type="checkbox" ng-model="item.isDone">
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="close()">Cancel</button>
+        <button aa-submit-form="ok(itemForm, item)" ng-disabled="" type="submit" class="btn btn-primary">OK</button>
+    </div>
+</form>
+
+

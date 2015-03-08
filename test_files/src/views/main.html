@@ -1,0 +1,20 @@
+
+<button class="btn btn-danger" ng-click="delAll()" ng-show="itemsExist()">delete all items</button>
+<button class="btn btn-primary" ng-click="openModel()">Add item</button>
+
+<div>
+
+    <div class="card" ng-repeat="item in itemList">
+        <h5>{{ item.name }}</h5>
+        <div class="description">
+            <p>{{ item.longDescription }}</p>
+        </div>
+        <div class="detail">
+            <p><span class="pull-left">Quantity:&nbsp;{{ item.quantity }}</span>&nbsp;<span class="pull-right">done:&nbsp;{{ item.isDone }}</span></p>
+        </div>
+        <button class="btn btn-danger btn-xs pull-right" ng-click="delItem($index)">delete item</button>
+    </div>
+
+<div ui-view="form"></div>
+
+</div>
