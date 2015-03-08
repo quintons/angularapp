@@ -1,2 +1,0 @@
-# angularapp
-basic application
